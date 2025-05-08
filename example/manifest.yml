@@ -1,0 +1,19 @@
+models:
+  - name: torchscript_test
+    type: torchscript
+    script_path: D:/learning/LLMserve/models/torchscript_model.pt
+
+  - name: full_model_test
+    type: class_pth
+    class_path: dummy_model.DummyModel
+    weights_path: models/dummy_model_full.pth
+
+  - name: state_dict_test
+    type: class_state_dict
+    class_path: dummy_model.DummyModel
+    state_dict_path: models/dummy_model_sd.pth
+
+  - name: predefined_test
+    type: predefined
+    source: torchvision.models.resnet18
+    pretrained: false
