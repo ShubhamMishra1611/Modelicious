@@ -2,6 +2,7 @@ import yaml
 import importlib
 import torch
 from pathlib import Path
+import logging
 
 
 class model_loading_error(Exception):
@@ -17,9 +18,12 @@ class ModelLoader:
         self.models = {}  # name -> model instance
 
     def _load_manifest(self):
+        print(f"Loading manifest from {self.manifest_path}...")
         if not self.manifest_path.exists():
+            print(f"Manifest file {self.manifest_path} does not exist.")
             return {"models": []}
         with open(self.manifest_path, 'r') as f:
+            print(f"Manifest file {self.manifest_path} loaded.")
             return yaml.safe_load(f)
 
     def save_manifest(self):
@@ -27,6 +31,7 @@ class ModelLoader:
             yaml.safe_dump(self.manifest_data, f)
 
     def load_model_by_name(self, name: str):
+        print(f"Loading model {name}...")
         for config in self.manifest_data.get("models", []):
             if config['name'] == name:
                 return self._load_model(config)
