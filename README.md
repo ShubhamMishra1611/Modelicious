@@ -1,5 +1,10 @@
 # How to ?
 
+To run simply do
+
+    uvicorn app.main:app --reload  
+
+
 ## 1. Load Model and Manifest
 
 
